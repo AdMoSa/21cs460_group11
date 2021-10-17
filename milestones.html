@@ -29,7 +29,29 @@ body {
 <div id="about" class="w3-container w3-padding-32">
 <h2 class="w3-center">Milestones</h2>
 <hr />
-<p>To be updated<p>
+<p>Half way targets achieved:<p>
+<ul>
+   <li>Scrapping of Data from the official FPL site of the current season(2021/22) and historical data of seasons till 2016/17.
+   <li>Scrapping of betting odds of current and past seasons from the site "oddsportal.com".
+   <li>Implementation of SVM and generating data and insights on player selection by the top managers the current season(2021/22) and the previous season(2020/21).
+   <li>Correlating the results as obtained from SVM with the historical(test) data. Marked improvement observed on the prediction for current season.
+   <li>Analysis of the <a href="relevant.html">1st</a> and <a href="relevant.html">3rd</a> papers from the relevant paper section. We tried to implement learnings from these papers into our code.
+   <li>Link to all the files and the SVM code --><a href ="https://github.com/AdMoSa/21cs460_group11/tree/main/Code">CODE</a>.
+</ul>
+<h3 class ="w3-center">Results obtained</h3>
+<ul>
+    <li>SVM performs well when we included the data of the teams of top players of last and this season, and betting data.
+    <li> For high threshold, when we are trying to find the difference makers, the model is able to have high accuracy as the number of 0 predictions is high. Still, half the predictions are the ones that actually perform well. Selecting captains would need a bit more surity.
+</ul>
+
+<h3 class ="w3-center">Further Plans</h3>
+<ul>
+    <li>Problems that are obvious: Time- series nature of points is not being captured. Taking inspiration from the <a href="relevant.html">3rd</a> paper, we will try LSTM neural networks as they have shown good results for FPL for data of different seasons. Another idea to integrate is making windowed data, taking average of a few gameweeks to capture the variation
+    <li> A lot of players don't get picked and end up getting 0 points. While it is important to predict these players so we don't pick them, they also skew our models so that predicting players who score too high becomes difficult. We need to find a modification that helps detect such extremums or find a way to remove these 0 players.
+</ul>
+<br>
+<embed src="Project_midway_ML.pdf" width="800px" height="2100px" />
+
 </div>
 
 <!-- End Content -->
