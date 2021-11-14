@@ -12,14 +12,6 @@ body {
 
 <body>
 
-<!-- Navigation (Stays on Top) -->
-<div class="w3-top w3-bar w3-black">
-<a href="index.html" class="w3-bar-item w3-button">Home</a>
-<a href="proposal.html" class="w3-bar-item w3-button">Proposal</a>
-<a href="milestones.html" class="w3-bar-item w3-button">Milestones</a>
-<a href="relevant.html" class="w3-bar-item w3-button">Relevant Papers</a>
-<a href="https://github.com/AdMoSa/21cs460_group11" class="w3-bar-item w3-button">Github</a>
-</div>
 
 <!-- Start Content -->
 <div id="home" class="w3-content">
@@ -37,6 +29,156 @@ body {
 <p>Is a game played by fans of the premiership where they get to put their managerial hats on and choose a team of 15 players to play against all such other teams in a bid to place the highest in terms of points scored in order to win goodies and most often the bragging rights among friends.<p>
 <p>The aim of the game is to chose a well balanced team of 15 players, for a budget fixed and then make one change weekly or two changes bi-weekly in a bid to maximise the points scored. Each week a team of 11 out of the 15 has to be fielded and the captain of the team has to be decided as his points get doubled. 
 </div>
+
+<div id="about" class="w3-container w3-padding-32">
+<h2 class="w3-center">Proposal</h2>
+<hr />
+<p>Fantasy premier league is more a game of skill for experienced players than it would seem. This correlation has been found in previous works. Those at the top 0.5% of the total FPL players have been doing continuously good over the years.</p>
+<p>We intend to study the habits of these top managers and find strategies that they seem to employ to get consistent results year after year. We will also take the betting odds from different betting sites to incorporate a return ratio for each player to see how or if they seem to reflect the performances on pitch.<p>
+<p>The end goal of this project is to make a program which can take your team data and the athelete data for the past weeks on top of historical data (past season performances) and give a prediction for the best possible transfer to make and the captain to choose. Higher the points scored w.r.t other will correlate to higher success of the algorithm.<p>
+<h3 class="w3-center">Machine Learning Aspect</h3>
+<p>Pre-processing data (clustering based on team composition) to get players who are common in teams of current high ranked players and high ranked players of previous years, along with how similar are the teams.Analysing output as binary (1, if player is predicted to score > threshold points otherwise, 0)<p>
+<ul>
+  <li>Applying SVM</li>
+  <li>Using Neural Networks</li>
+</ul>
+<p>We plan to do this analysis separately for goalkeepers, defenders, midfielders and forwards.<p>
+<h3 class="w3-center">Additional work</h3>
+<p> If time permits we intend to go a step ahead and:<p>
+<ul>
+  <li>Try to find the difference makers, i.e. players not selected by many people that do end up performing well.</li>
+  <li>Modifying the algorithm to make an initial team based on prices and the budget of 100 mil at the start of the season, so we can see the performance of the program over the whole season.</li>
+<ul>
+<br>
+<embed src="Project_proposal_ML.pdf" width="800px" height="500px" />
+
+</div>
+
+
+<div id="about" class="w3-container w3-padding-32">
+<h2 class="w3-center">Milestones</h2>
+<hr />
+<p>Half way targets achieved:<p>
+<ul>
+   <li>Scrapping of Data from the official FPL site of the current season(2021/22) and historical data of seasons till 2016/17.
+   <li>Scrapping of betting odds of current and past seasons from the site "oddsportal.com".
+   <li>Implementation of SVM and generating data and insights on player selection by the top managers the current season(2021/22) and the previous season(2020/21).
+   <li>Correlating the results as obtained from SVM with the historical(test) data. Marked improvement observed on the prediction for current season.
+   <li>Analysis of the <a href="relevant.html">1st</a> and <a href="relevant.html">3rd</a> papers from the relevant paper section. We tried to implement learnings from these papers into our code.
+   <li>Link to all the files and the SVM code --><a href ="https://github.com/AdMoSa/21cs460_group11/tree/main/Code">CODE</a>.
+</ul>
+<h3 class ="w3-center">Midway Results</h3>
+<ul>
+    <li>SVM performs well when we included the data of the teams of top players of last and this season, and betting data.
+    <li> For high threshold, when we are trying to find the difference makers, the model is able to have high accuracy as the number of 0 predictions is high. Still, half the predictions are the ones that actually perform well. Selecting captains would need a bit more surity.
+</ul>
+
+<h3 class ="w3-center">Issues Identified</h3>
+<ul>
+    <li>Problems that are obvious: Time- series nature of points is not being captured. Taking inspiration from the <a href="relevant.html">3rd</a> paper, we will try LSTM neural networks as they have shown good results for FPL for data of different seasons. Another idea to integrate is making windowed data, taking average of a few gameweeks to capture the variation
+    <li> A lot of players don't get picked and end up getting 0 points. While it is important to predict these players so we don't pick them, they also skew our models so that predicting players who score too high becomes difficult. We need to find a modification that helps detect such extremums or find a way to remove these 0 players.
+<ul>
+<br>
+<embed src="Project_midway_ML.pdf" width="800px" height="500px" />
+
+<h3 class ="w3-center">Final Results</h3>
+<ul>
+    <li>LSTM-RNN doesn't perform well when asked to predict future performance of players based on their past season and previous game-weeks data.
+    <li>Next we implemented ARIMA(Autoregressive Integrated Moving Average Model). Although it's not able to quantitatively predict the expected points for the coming game-weeks, it's able to qualitatively predict their form. 
+    <li>Hence we ran ARIMA to capture this form as 1 if the player does well than his average and 0 otherwise. Using this as a feature we ran our SVM again.
+    <li>This time we ran SVM for each position on the field(GK, FW, MF, DF) separately
+    <li>The code works reasonably well for GK, for MF and DF it works well when asked to predict for a threshold of 4 points per game-week. For FW it was unable to predict anything useful which can be attributed to the highly random nature of their performance.
+</ul>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-7zrl{text-align:left;vertical-align:bottom}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-1wig">Position</th>
+    <th class="tg-1wig">Point Threshold</th>
+    <th class="tg-1wig">Accuracy</th>
+    <th class="tg-1wig">Precision</th>
+    <th class="tg-1wig">Recall</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-1wig" rowspan="2">GK</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-7zrl">0.9268</td>
+    <td class="tg-7zrl">0.7143</td>
+    <td class="tg-7zrl">0.8333</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-7zrl">0.9268</td>
+    <td class="tg-7zrl">0.5000</td>
+    <td class="tg-7zrl">0.6667</td>
+  </tr>
+  <tr>
+    <td class="tg-1wig" rowspan="2">MF</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-7zrl">0.9145</td>
+    <td class="tg-7zrl">0.8333</td>
+    <td class="tg-7zrl">0.4762</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-7zrl">0.9539</td>
+    <td class="tg-7zrl">1.0000</td>
+    <td class="tg-7zrl">0.4167</td>
+  </tr>
+  <tr>
+    <td class="tg-1wig" rowspan="2">DF</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-7zrl">0.8720</td>
+    <td class="tg-7zrl">0.6000</td>
+    <td class="tg-7zrl">0.3333</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-7zrl">0.9680</td>
+    <td class="tg-7zrl">1.0000</td>
+    <td class="tg-7zrl">0.5000</td>
+  </tr>
+  <tr>
+    <td class="tg-1wig" rowspan="2">FW</td>
+    <td class="tg-0lax">3</td>
+    <td class="tg-7zrl">0.8431</td>
+    <td class="tg-7zrl">0.5385</td>
+    <td class="tg-7zrl">0.7778</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">5</td>
+    <td class="tg-7zrl">0.9020</td>
+    <td class="tg-7zrl">0.4000</td>
+    <td class="tg-7zrl">0.5000</td>
+  </tr>
+</tbody>
+</table>
+
+<h3 class ="w3-center">Issues Identified</h3>
+<ul>
+    <li>As sir rightly pointed out, A better way to check if LSTM RNN could have been useful for us would have been if we removed the spikes in our data first using averaging over different gameweeks. This would have helped in identifying any pattern if it exists.
+<ul>
+<br>
+<embed src="ML_final_presentation.pdf" width="800px" height="500px" />
+
+
+
+</div>
+
+
+
 
 <!-- End Content -->
 </div>
