@@ -83,6 +83,7 @@ body {
 
 <h3 class ="w3-center">Final Results</h3>
 <ul>
+    <li>To combat the problems identified earlier we used LSTM neural network and ARIMA(Autoregressive Integrated Moving Average Model) and took a hybrid model with certain ideal percentage of each system as our input to the SVM model.
     <li>LSTM-RNN doesn't perform well when asked to predict future performance of players based on their past season and previous game-weeks data.
     <li>Next we implemented ARIMA(Autoregressive Integrated Moving Average Model). Although it's not able to quantitatively predict the expected points for the coming game-weeks, it's able to qualitatively predict their form. 
     <li>Hence we ran ARIMA to capture this form as 1 if the player does well than his average and 0 otherwise. Using this as a feature we ran our SVM again.
